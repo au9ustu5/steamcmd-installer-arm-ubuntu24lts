@@ -7,16 +7,10 @@ sudo apt install -y cmake build-essential git wget tar python3-pip
 # Install additional dependencies for box86
 sudo apt install -y gcc-multilib g++-multilib
 
-# Install box86
-git clone https://github.com/ptitSeb/box86
-cd box86
-mkdir build
-cd build
-cmake .. -DRPI4=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
-make -j$(nproc)
-sudo make install
-cd ../..
-sudo systemctl restart systemd-binfmt
+# Download and install pre-built box86 binary
+wget https://github.com/ptitSeb/box86/releases/download/v0.2.3/box86_0.2.3_armhf.deb
+sudo dpkg -i box86_0.2.3_armhf.deb
+sudo apt-get install -f
 
 # Verify box86 installation
 if ! command -v box86 &> /dev/null
